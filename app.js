@@ -18,6 +18,14 @@ const toolBox = {
 }
 
 let wallet = 0; // player starts with $0
+// LEVEL UP 2- Milestones & Achievements
+const milestones = [
+    {amount: 50, message: "Congrats!, You've earned $50 and unlocked the 'Grass Rockstar' Badge!"},
+    {amount: 100, message: "Congrats!, You've earned $100 and unlocked the 'Grass Master' Badge!"},
+    {amount: 200, message: "Congrats!, You've earned $200 and unlocked the 'Grass Legend' Badge!"},
+]
+const achievedMilestones = []; // To track achieved milestones
+
 
 // Step 3: Display Available Tools for Purchase
 //  loops through tools and prints (teeth is not displayed since it's free)
@@ -32,20 +40,29 @@ for(const tool in toolBox.tools){
 console.log("\n");
 };
 
+// LEVEL UP 2- Step 2 
+const checkMilestones = () =>{
+milestones.forEach((milestone)=>{
+    if(wallet >= milestone.amount && !achievedMilestones.includes(milestone.amount)){
+        console.log(milestone.message);
+        achievedMilestones.push(milestone.amount)  
+    }
+})
+};
+
 // Step 4: Cutting Grass to Earn Money
 const cutGrass = () =>{
     // Earn money based on the current tool's power
     let earnings = toolBox.tools[toolBox.currentTool].power;
-// LEVEL UP ADD ON
+// LEVEL UP 1 ADD ON - Random Bonus Events
 // 25% chance to trigger a bonus event 
-
 if(Math.random() < 0.25){
  earnings *= 2; // Double the earnings
  console.log("Lucky day! You got a bonus and earned double the amount!");
 }
    wallet += earnings;
    console.log(`You cut grass with your ${toolBox.currentTool}! You earned $${toolBox.tools[toolBox.currentTool].power}. Total in wallet: $${wallet}.`);
-
+ checkMilestones();
 };
 // cutGrass();
 
