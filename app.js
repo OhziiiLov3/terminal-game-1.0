@@ -39,7 +39,7 @@ const cutGrass = () =>{
    console.log(`You cut grass with your ${toolBox.currentTool}! You earned $${toolBox.tools[toolBox.currentTool].power}. Total in wallet: $${wallet}.`);
 
 };
-cutGrass();
+// cutGrass();
 
 // Step 5: Buying a New Tool
 const buyTool = () =>{
@@ -50,7 +50,7 @@ const buyTool = () =>{
     // check if tool exisit
     if(toolBox.tools[toolsToBuy]){
         const toolPrice = toolBox.tools[toolsToBuy].price;
-        if(wallet > toolPrice){   // Check if the player has enough money
+        if(wallet >= toolPrice){   // Check if the player has enough money
             wallet -= toolPrice; // Deduct the price from the wallet
             toolBox.currentTool = toolsToBuy; // Set the current tool to the new one
             console.log(`You bought the ${toolsToBuy} for $${toolPrice}. Your new tool is ${toolsToBuy}`);
@@ -65,5 +65,25 @@ const buyTool = () =>{
 // Step 6: Adding a Game Loop
 
 while(true){
+console.log("\n What would you like to do?");
+console.log("1. Cut grass");
+console.log("2. Buy a new tool");
+console.log("3. Check wallet");
+console.log("4. Exit");
 
+const choice = prompt("Enter your choice (1-4): ");
+
+if(choice === '1'){
+    cutGrass();
+}else if(choice === '2'){
+    buyTool();
+}else if(choice === '3'){
+    console.log(`You have $${wallet} in your wallet`);
+    
+}else if(choice === '4'){
+    console.log("Thanks for playing! Goodbye.");
+    break;
+}else{
+    console.log("Invalid choice. Please enter 1, 2, 3, or 4.");
+}
 }
