@@ -35,7 +35,15 @@ console.log("\n");
 // Step 4: Cutting Grass to Earn Money
 const cutGrass = () =>{
     // Earn money based on the current tool's power
-   wallet += toolBox.tools[toolBox.currentTool].power;
+    let earnings = toolBox.tools[toolBox.currentTool].power;
+// LEVEL UP ADD ON
+// 25% chance to trigger a bonus event 
+
+if(Math.random() < 0.25){
+ earnings *= 2; // Double the earnings
+ console.log("Lucky day! You got a bonus and earned double the amount!");
+}
+   wallet += earnings;
    console.log(`You cut grass with your ${toolBox.currentTool}! You earned $${toolBox.tools[toolBox.currentTool].power}. Total in wallet: $${wallet}.`);
 
 };
